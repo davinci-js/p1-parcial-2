@@ -1,4 +1,4 @@
-// scripts/Producto.js
+
 
 class Producto {
     constructor(id, nombre, descripcion, precio, imagen, categoria) {
