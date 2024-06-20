@@ -36,13 +36,17 @@ function renderProductos(filtroCategoria = null) {
         h3.textContent = producto.nombre;
         productoElement.appendChild(h3);
 
-        const p1 = document.createElement('p');
-        p1.textContent = producto.descripcion;
-        productoElement.appendChild(p1);
+        const h4 = document.createElement('h4');
+        h4.textContent = producto.descripcion;
+        productoElement.appendChild(h4);
 
-        const p2 = document.createElement('p');
-        p2.textContent = `Precio: $${producto.precio}`;
-        productoElement.appendChild(p2);
+        const h5 = document.createElement('h5');
+        h5.textContent = `Precio: $${producto.precio}`;
+        productoElement.appendChild(h5);
+
+        const h6 = document.createElement('h6');
+        h6.textContent = `${producto.categoria}`;
+        productoElement.appendChild(h6);
 
         const button = document.createElement('button');
         button.textContent = 'Ver detalle';
@@ -72,17 +76,17 @@ function mostrarDetalleProducto(id) {
     h3.textContent = producto.nombre;
     detalleProducto.appendChild(h3);
 
-    const p1 = document.createElement('p');
-    p1.textContent = producto.descripcion;
-    detalleProducto.appendChild(p1);
+    const h4 = document.createElement('h4');
+    h4.textContent = producto.descripcion;
+    detalleProducto.appendChild(h4);
 
-    const p2 = document.createElement('p');
-    p2.textContent = `Precio: $${producto.precio}`;
-    detalleProducto.appendChild(p2);
+    const h5 = document.createElement('h5');
+    h5.textContent = `Precio: $${producto.precio}`;
+    detalleProducto.appendChild(h5);
 
-    const p3 = document.createElement('p');
-    p3.textContent = producto.categoria;
-    detalleProducto.appendChild(p3);
+    const h6 = document.createElement('h6');
+    h6.textContent = producto.categoria;
+    detalleProducto.appendChild(h6);
 
     const button = document.createElement('button');
     button.textContent = 'Agregar al carrito';

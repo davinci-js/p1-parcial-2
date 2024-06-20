@@ -48,6 +48,17 @@ h3 {
     text-align: center;
 }
 
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat';
+    font-size: 2.0em;
+    line-height: 1.5;
+    font-weight: 700;
+    text-align: center;
+    color: #ff15e475;
+}
+
 h2,
 h3 {
     margin: 1em 0;
@@ -287,7 +298,7 @@ input[type='submit']:hover {
     align-self: center;
     width: 90%;
     padding: 1em;
-    border: 2px solid red;
+    border: 2px solid rgb(255, 71, 92);
     border-radius: 20px;
 }
 
@@ -421,7 +432,8 @@ input[type='submit']:hover {
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; 
-
+    max-width: 500px;
+    min-height: 450px;
     border: 1px solid #888;
 }
 
@@ -443,7 +455,7 @@ input[type='submit']:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    min-height: 44vh;
 }
 
 #detalleProducto > button{
