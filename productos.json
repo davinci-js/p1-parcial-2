@@ -5,7 +5,7 @@
         "descripcion": "Diosa de la guerra y loca por las cortinas del hogar y las bolsas de Nylon",
         "precio": 100,
         "imagen": "./images/ati1_no_bg.png",
-        "categoria": "categoria 1"
+        "categoria": "calico"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "descripcion": "Gato super tierno pero te mueve todas las piedritas y te genera sensación amor odio",
         "precio": 100,
         "imagen": "./images/divo1_no_bg.png",
-        "categoria": "categoria 2"
+        "categoria": "carey"
     },
     {
         "id": 3,
@@ -21,7 +21,7 @@
         "descripcion": "Gato Enojon y con cara muy expresiva",
         "precio": 100,
         "imagen": "images/divo2.png",
-        "categoria": "categoria 3"
+        "categoria": "solido"
     },
     {
         "id": 4,
@@ -29,7 +29,7 @@
         "descripcion": "Rey de la siesta y la pachorra",
         "precio": 100,
         "imagen": "images/divo3.png",
-        "categoria": "categoria 2"
+        "categoria": "carey"
     },
     {
         "id": 5,
@@ -37,7 +37,7 @@
         "descripcion": "Gato super tierno con poder de mostrar la pancita en situaciones cruciales",
         "precio": 100,
         "imagen": "./images/cute1_no_bg.png",
-        "categoria": "categoria 3"
+        "categoria": "carey"
     },
     {
         "id": 6,
@@ -45,7 +45,7 @@
         "descripcion": "Gato con ojitos de videotape",
         "precio": 100,
         "imagen": "./images/gato1_no_bg.png",
-        "categoria": "categoria 1"
+        "categoria": "calico"
     },
     {
         "id": 7,
@@ -53,7 +53,7 @@
         "descripcion": "No le gusta el afecto, los mimos, ni el calor humano, solo le interesa la comida que le puedas ofrecer, está de oferta",
         "precio": 50,
         "imagen": "./images/gordo-pelusa1_no_bg.png",
-        "categoria": "categoria 2"
+        "categoria": "carey"
     },
     {
         "id": 8,
@@ -69,6 +69,6 @@
         "descripcion": "Un gato que sus colores te recuerdan a una oreo y te dan ganas de comértelo a besos, Spoiler: No sabe a oreo.",
         "precio": 100,
         "imagen": "./images/oreo1.webp",
-        "categoria": "categoria 1"
+        "categoria": "carey"
     }
 ]

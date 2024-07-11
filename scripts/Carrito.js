@@ -4,7 +4,6 @@ class Carrito {
     }
 
     agregarProducto(producto) {
-        debugger;
         let productoExistente = this.productos.find(prod => prod.id === producto.id);
         if (!productoExistente) {
             this.productos.push(producto);
@@ -43,17 +42,17 @@ class Carrito {
         const categoria1 = document.createElement('a');
         categoria1.href = '#';
         categoria1.textContent = 'Categoría 1';
-        categoria1.onclick = () => filtrarPorCategoria('categoria 1');
+        categoria1.onclick = () => filtrarPorCategoria('solido');
         
         const categoria2 = document.createElement('a');
         categoria2.href = '#';
         categoria2.textContent = 'Categoría 2';
-        categoria2.onclick = () => filtrarPorCategoria('categoria 2');
+        categoria2.onclick = () => filtrarPorCategoria('carey');
         
         const categoria3 = document.createElement('a');
         categoria3.href = '#';
         categoria3.textContent = 'Categoría 3';
-        categoria3.onclick = () => filtrarPorCategoria('categoria 3');
+        categoria3.onclick = () => filtrarPorCategoria('calico');
     
         filtrarPor.appendChild(categoria1);
         filtrarPor.appendChild(document.createTextNode(' | '));
