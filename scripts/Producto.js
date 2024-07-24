@@ -18,7 +18,7 @@ class Producto {
                 <p>${this.descripcion}</p>
                 <p>${this.categoria}</p>
                 <p>Precio: $${this.precio}</p>
-                <button onclick="mostrarDetalleProducto(${this.id})">Ver detalle</button>
+                <button class="btn btn-secondary" onclick="mostrarDetalleProducto(${this.id})">Ver detalle</button>
             </div>
         `;
     }

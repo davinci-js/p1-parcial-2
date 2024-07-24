@@ -439,9 +439,10 @@ input[type='submit']:hover {
 
 .close {
     color: #aaa;
-    float: right;
+    text-align: end;
     font-size: 28px;
     font-weight: bold;
+    padding-right: 10px;
 }
 
 .close:hover,
@@ -475,7 +476,23 @@ input[type='submit']:hover {
 }
 
 #detalleCarrito > div{
-    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#detalleCheckout{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2vw;
+}
+
+#detalleCheckout > div{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -508,4 +525,10 @@ input[type='submit']:hover {
 .buttonsContainer>span{
     font-size: 20px;
     color: black;
+}
+
+span{
+    font-size: 20px;
+    color: red;
+    text-align: center;
 }
