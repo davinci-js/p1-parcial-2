@@ -9,17 +9,4 @@ class Producto {
         this.imagen = imagen;
         this.categoria = categoria;
     }
-
-    render() {
-        return `
-            <div class="producto">
-                <img src="${this.imagen}" alt="${this.nombre}">
-                <h3>${this.nombre}</h3>
-                <p>${this.descripcion}</p>
-                <p>${this.categoria}</p>
-                <p>Precio: $${this.precio}</p>
-                <button class="btn btn-secondary" onclick="mostrarDetalleProducto(${this.id})">Ver detalle</button>
-            </div>
-        `;
-    }
 }

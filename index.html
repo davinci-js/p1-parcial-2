@@ -18,8 +18,7 @@
         </header>
         <main>
             <div id="carrito">
-                <p><span>0</span> ítems agregados</p>
-                <p>$<span>0</span> es el total</p>
+                <p>El carrito está vacío</p>
                 <p>Filtrar por 
                     <a href="#" onclick="filtrarPorCategoria('solido')">Solido</a> | 
                     <a href="#" onclick="filtrarPorCategoria('carey')">Carey</a> | 
@@ -31,7 +30,7 @@
             </div>
             <div class="container-fluid bg-white">
                 <h2>Productos</h2>
-                <div id="productos" class="container mx-auto"></div>
+                <div id="productos" class="container row mx-auto"></div>
             </div>
         </main>
         <footer>
@@ -55,7 +54,7 @@
         <div id="modalCarrito" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="cerrarModal('modalCarrito')">&times;</span>
-                <div id="detalleCarrito"></div>
+                <div id="detalleCarrito" class="row"></div>
             </div>
         </div>
 

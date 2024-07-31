@@ -6,11 +6,11 @@ class Carrito {
     agregarProducto(producto) {
         let productoExistente = this.productos.find(prod => prod.id === producto.id);
         if (productoExistente) {
-            productoExistente.cantidad = (productoExistente.cantidad || 1) + 1; // Incrementar la cantidad
-            productoExistente.totalPrecio = productoExistente.cantidad * productoExistente.precio; // Actualizar el precio total
+            productoExistente.cantidad = (productoExistente.cantidad || 1) + 1; 
+            productoExistente.totalPrecio = productoExistente.cantidad * productoExistente.precio;
         } else {
-            producto.cantidad = 1; // Inicializar la cantidad en 1
-            producto.totalPrecio = producto.precio; // Inicializar el precio total
+            producto.cantidad = 1;
+            producto.totalPrecio = producto.precio;
             this.productos.push(producto);
         }
         this.actualizarCarrito();
@@ -27,7 +27,7 @@ class Carrito {
     }
 
     vaciarCarrito() {
-        this.productos = [];
+        this.productos.splice(0, this.productos.length);
         this.actualizarCarrito();
     }
 
@@ -42,12 +42,19 @@ class Carrito {
     actualizarCarrito() {
         const carritoElemento = document.getElementById('carrito');
         carritoElemento.textContent = '';
-
         const itemsAgregados = document.createElement('p');
-        itemsAgregados.textContent = `${this.contarProductos()} ítems agregados`;
+        if(this.contarProductos()>0){
+            itemsAgregados.textContent = `${this.contarProductos()} ítems agregados`;
+        } else{
+            itemsAgregados.textContent = "El carrito está vacío"
+        }
 
         const total = document.createElement('p');
-        total.textContent = `$${this.obtenerTotal()} es el total`;
+        if(this.obtenerTotal()>0){
+            total.textContent = `$${this.obtenerTotal()} es el total`;
+        } else{
+            total.textContent = ""
+        }
 
         const filtrarPor = document.createElement('p');
         filtrarPor.textContent = 'Filtrar por ';
@@ -67,11 +74,18 @@ class Carrito {
         categoria3.textContent = 'Calicó';
         categoria3.onclick = () => filtrarPorCategoria('calico');
 
+        const todos = document.createElement('a');
+        todos.href = '#';
+        todos.textContent = 'Todos';
+        todos.onclick = () => filtrarPorCategoria('');
+
         filtrarPor.appendChild(categoria1);
         filtrarPor.appendChild(document.createTextNode(' | '));
         filtrarPor.appendChild(categoria2);
         filtrarPor.appendChild(document.createTextNode(' | '));
         filtrarPor.appendChild(categoria3);
+        filtrarPor.appendChild(document.createTextNode(' | '));
+        filtrarPor.appendChild(todos);
 
         const verCarritoBtn = document.createElement('button');
         verCarritoBtn.textContent = 'Ver carrito';

@@ -25,15 +25,18 @@ function renderProductos(filtroCategoria = null) {
 
     productosFiltrados.forEach(producto => {
         const productoElement = document.createElement('div');
-        productoElement.classList.add('producto');
         productoElement.classList.add('col-lg-3');
         productoElement.classList.add('col-md-6');
         productoElement.classList.add('col-12');
+        productoElement.classList.add('card');
 
         const img = document.createElement('img');
         img.src = producto.imagen;
         img.alt = producto.nombre;
         productoElement.appendChild(img);
+
+        const contentElement = document.createElement('div');
+        contentElement.classList.add('card-content');
 
         const h2 = document.createElement('h2');
         h2.textContent = producto.nombre;
@@ -48,7 +51,7 @@ function renderProductos(filtroCategoria = null) {
         productoElement.appendChild(spanPrecio);
 
         const spanCategoria = document.createElement('span');
-        spanCategoria.textContent = `${producto.categoria}`;
+        spanCategoria.textContent = `Categoría: ${producto.categoria}`;
         productoElement.appendChild(spanCategoria);
 
         const button = document.createElement('button');
@@ -56,8 +59,8 @@ function renderProductos(filtroCategoria = null) {
         button.classList.add('btn-secondary');
         button.textContent = 'Ver detalle';
         button.addEventListener('click', () => mostrarDetalleProducto(producto.id));
-        productoElement.appendChild(button);
-
+        contentElement.appendChild(button);
+        productoElement.appendChild(contentElement);
         contenedorProductos.appendChild(productoElement);
     });
 }
@@ -68,8 +71,8 @@ function filtrarPorCategoria(categoria) {
 }
 
 function modalOferta() {
-    // Crear el modal y sus elementos
     const modal = document.createElement('div');
+    modal.classList.add('modal');
     modal.id = 'modalOferta';
     modal.style.position = 'fixed';
     modal.style.top = '0';
@@ -89,32 +92,46 @@ function modalOferta() {
     modalContent.style.textAlign = 'center';
 
     const img = document.createElement('img');
-    img.src = '../images/gordo-pelusa1_no_bg.png'; // Cambia esto a la ruta de tu imagen
+    img.src = '../images/gordo-pelusa1_no_bg.png';
     img.alt = 'Gordo Pelusa';
     img.style.maxWidth = '100%';
     img.style.height = 'auto';
 
     const leyenda = document.createElement('p');
-    leyenda.textContent = 'Llévate al Gordo Pelusa gratis, no hace falta que compres nada';
+    leyenda.textContent = 'Llevate al Gordo Pelusa gratis, no hace falta que compres nada';
     leyenda.style.marginTop = '10px';
     leyenda.style.fontSize = '18px';
     leyenda.style.color = 'black';
 
-    // Añadir la imagen y la leyenda al contenido del modal
+    const countdown = document.createElement('p');
+    countdown.id = 'countdown';
+    countdown.style.marginTop = '10px';
+    countdown.style.fontSize = '18px';
+    countdown.style.color = 'black';
+    countdown.classList.add('text-center');
+
     modalContent.appendChild(img);
     modalContent.appendChild(leyenda);
+    modalContent.appendChild(countdown);
 
-    // Añadir el contenido del modal al modal
     modal.appendChild(modalContent);
 
-    // Añadir el modal al cuerpo del documento
     document.body.appendChild(modal);
 
-    // Configurar un temporizador para cerrar el modal después de 10 segundos
-    setTimeout(() => {
-        document.body.removeChild(modal);
-    }, 10000);
+    let timeLeft = 10;
+    countdown.textContent = `${timeLeft}...`;
+
+    const interval = setInterval(() => {
+        timeLeft--;
+        countdown.textContent = `${timeLeft}...`;
+
+        if (timeLeft <= 0) {
+            clearInterval(interval);
+            document.body.removeChild(modal);
+        }
+    }, 1000);
 }
+
 
 function mostrarDetalleProducto(id) {
     const producto = productos.find(prod => prod.id === id);
@@ -140,7 +157,7 @@ function mostrarDetalleProducto(id) {
     detalleProducto.appendChild(spanPrecio);
 
     const spanCategoria = document.createElement('span');
-    spanCategoria.textContent = producto.categoria;
+    spanCategoria.textContent = `Categoría: ${producto.categoria}`;
     detalleProducto.appendChild(spanCategoria);
 
     const button = document.createElement('button');
@@ -172,6 +189,10 @@ function mostrarCarrito() {
         carrito.productos.forEach(prod => {
             const div = document.createElement('div');
             div.classList.add('h-100');
+            div.classList.add('col-lg-5');
+            div.classList.add('col-md-6');
+            div.classList.add('col-sm-12');
+            div.classList.add('mb-4');
 
             const img = document.createElement('img');
             img.src = prod.imagen;
@@ -191,15 +212,16 @@ function mostrarCarrito() {
             div.appendChild(p2);
 
             const unidades = document.createElement('p');
-            unidades.textContent = `Cantidad: ${prod.cantidad || 1}`; // Mostrar cantidad
+            unidades.textContent = `Cantidad: ${prod.cantidad || 1}`;
             div.appendChild(unidades);
 
             const totalPrecio = document.createElement('p');
-            totalPrecio.textContent = `Total: $${prod.totalPrecio}`; // Mostrar el precio total del producto
+            totalPrecio.textContent = `Total: $${prod.totalPrecio}`;
             div.appendChild(totalPrecio);
 
             const button = document.createElement('button');
-            button.classList.add('center');
+            button.classList.add('p-3');
+            button.classList.add('rounded');
             button.textContent = 'Quitar del carrito';
             button.addEventListener('click', () => removerDelCarrito(prod));
             div.appendChild(button);
@@ -208,10 +230,11 @@ function mostrarCarrito() {
         const checkout = document.createElement('button');
         checkout.classList.add('btn');
         checkout.classList.add('btn-primary');
-        checkout.classList.add('w-25');
+        checkout.classList.add('w-50');
         checkout.classList.add('mx-auto');
+        checkout.classList.add('my-4');
         checkout.textContent = "Ir a pagar";
-        checkout.addEventListener('click',()=>mostrarCheckout()) // Asegurarse de que este botón llama a mostrarCheckout
+        checkout.addEventListener('click',()=>mostrarCheckout())
         const containerBtn = document.createElement('div');
         containerBtn.classList.add('w-100');
         containerBtn.classList.add('mx-auto');
@@ -222,6 +245,7 @@ function mostrarCarrito() {
         h1.classList.add('text-center', 'w-100');
         h1.textContent = 'NO HAY PRODUCTOS PARA MOSTRAR';
         detalleCarrito.appendChild(h1);
+        cerrarModal('modalCarrito');
     }
 
     mostrarModal('modalCarrito');
@@ -237,34 +261,22 @@ function mostrarCheckout() {
         detalleCheckout.removeChild(detalleCheckout.firstChild);
     }
 
-    console.log("Productos en el carrito:", carrito.productos); // Verificar que los productos están presentes
-
+    const divContainerProductos = document.createElement('div');
+    divContainerProductos.classList.add('containerProductos');
     if (carrito.productos.length > 0) {
         carrito.productos.forEach(prod => {
-            console.log("Producto en el carrito:", prod); // Verificar que cada producto es iterado correctamente
-
-            const div = document.createElement('div');
-            div.classList.add('h-100');
-
+            const divProducto = document.createElement('div');
             const img = document.createElement('img');
             img.src = prod.imagen;
             img.alt = prod.nombre;
-            div.appendChild(img);
-
-            const unidades = document.createElement('p');
-            unidades.textContent = `Cantidad: ${prod.cantidad || 1}`; // Mostrar cantidad
-            div.appendChild(unidades);
-
-            const totalPrecio = document.createElement('p');
-            totalPrecio.textContent = `Total: $${prod.totalPrecio}`; // Mostrar el precio total del producto
-            div.appendChild(totalPrecio);
-
-            detalleCheckout.appendChild(div);
+            divProducto.appendChild(img);
+            divContainerProductos.appendChild(divProducto)
             totalCheckout += prod.totalPrecio;
         });
+        detalleCheckout.appendChild(divContainerProductos);
 
         const total = document.createElement('p');
-        total.textContent = `Total: $${totalCheckout}`; // Mostrar el precio total del producto
+        total.textContent = `Total: $${totalCheckout}`;
         detalleCheckout.appendChild(total);
 
         const formDatos = document.createElement('form');
@@ -272,37 +284,61 @@ function mostrarCheckout() {
         labelNombre.textContent = "Nombre";
         const inputNombre = document.createElement('input');
         inputNombre.placeholder = "Ingrese su nombre";
+        inputNombre.minLength=4;
         inputNombre.required = true;
 
         const labelApellido = document.createElement('label');
         labelApellido.textContent = "Apellido";
         const inputApellido = document.createElement('input');
         inputApellido.placeholder = "Ingrese su apellido";
+        inputApellido.minLength=4;
         inputApellido.required = true;
 
         const labelEmail = document.createElement('label');
         labelEmail.textContent = "Email";
         const inputEmail = document.createElement('input');
+        inputEmail.type="email";
         inputEmail.placeholder = "Ingrese su Email";
         inputEmail.required = true;
 
         const labelLugar = document.createElement('label');
         labelLugar.textContent = "Lugar";
         const inputLugar = document.createElement('input');
-        inputLugar.placeholder = "Ingrese su Lugar";
+        inputLugar.placeholder = "Ingrese su lugar de entrega";
+        inputLugar.minLength=6;
         inputLugar.required = true;
 
         const labelFechaDeEntrega = document.createElement('label');
         labelFechaDeEntrega.textContent = "Fecha De Entrega";
         const inputFechaDeEntrega = document.createElement('input');
+        inputFechaDeEntrega.type="date"
         inputFechaDeEntrega.placeholder = "Ingrese su Fecha De Entrega";
         inputFechaDeEntrega.required = true;
 
         const labelMetodoDePago = document.createElement('label');
-        labelMetodoDePago.textContent = "Metodo De Pago";
-        const inputMetodoDePago = document.createElement('input');
-        inputMetodoDePago.placeholder = "Ingrese su Metodo De Pago";
-        inputMetodoDePago.required = true;
+        labelMetodoDePago.textContent = "Método De Pago";
+        
+        const inputMetodoDePagoVisa = document.createElement('input');
+        inputMetodoDePagoVisa.type = "radio";
+        inputMetodoDePagoVisa.name = "metodoPago";
+        inputMetodoDePagoVisa.checked = true; // Seleccionado por defecto
+        const labelVisa = document.createElement('label');
+        labelVisa.textContent = "Visa";
+        labelVisa.htmlFor = "visa";
+        
+        const inputMetodoDePagoMastercard = document.createElement('input');
+        inputMetodoDePagoMastercard.type = "radio";
+        inputMetodoDePagoMastercard.name = "metodoPago";
+        const labelMastercard = document.createElement('label');
+        labelMastercard.textContent = "Mastercard";
+        labelMastercard.htmlFor = "mastercard";
+        
+        const inputMetodoDePagoAmex = document.createElement('input');
+        inputMetodoDePagoAmex.type = "radio";
+        inputMetodoDePagoAmex.name = "metodoPago";
+        const labelAmex = document.createElement('label');
+        labelAmex.textContent = "American Express";
+        labelAmex.htmlFor = "amex";
 
         formDatos.appendChild(labelNombre);
         formDatos.appendChild(inputNombre);
@@ -315,25 +351,41 @@ function mostrarCheckout() {
         formDatos.appendChild(labelFechaDeEntrega);
         formDatos.appendChild(inputFechaDeEntrega);
         formDatos.appendChild(labelMetodoDePago);
-        formDatos.appendChild(inputMetodoDePago);
+        formDatos.appendChild(labelVisa);
+        formDatos.appendChild(inputMetodoDePagoVisa);
+        formDatos.appendChild(labelMastercard);
+        formDatos.appendChild(inputMetodoDePagoMastercard);
+        formDatos.appendChild(labelAmex);
+        formDatos.appendChild(inputMetodoDePagoAmex);
         detalleCheckout.appendChild(formDatos);
 
         const finalizarCompraBtn = document.createElement('button');
-        finalizarCompraBtn.classList.add('btn', 'btn-danger', 'w-25', 'mx-auto');
+        finalizarCompraBtn.classList.add('btn', 'btn-primary', 'w-25', 'mx-auto','my-4');
         finalizarCompraBtn.textContent = "Finalizar Compra";
+        const cancelarCompraBtn = document.createElement('button');
+        cancelarCompraBtn.classList.add('btn', 'btn-danger', 'w-25', 'mx-auto','my-4');
+        cancelarCompraBtn.textContent = "Volver";
 
         finalizarCompraBtn.addEventListener('click', (event) => {
-            event.preventDefault(); // Evita el comportamiento predeterminado del botón
+            event.preventDefault(); 
             if (formDatos.checkValidity()) {
                 cerrarModal('modalCheckout');
+                vaciarCarrito();
             } else {
-                formDatos.reportValidity(); // Muestra mensajes de error en los campos no válidos
+                formDatos.reportValidity();
             }
+        });
+
+        cancelarCompraBtn.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            cerrarModal('modalCheckout');
+            mostrarModal('modalCarrito');
         });
 
         const containerBtn = document.createElement('div');
         containerBtn.classList.add('w-100', 'mx-auto');
         containerBtn.appendChild(finalizarCompraBtn);
+        containerBtn.appendChild(cancelarCompraBtn);
         detalleCheckout.appendChild(containerBtn);
 
     } else {
@@ -358,9 +410,11 @@ function mostrarModal(id) {
 function cerrarModal(id) {
     const modal = document.getElementById(id);
     modal.style.display = "none";
-    if(id=='modalCheckout'){
-        carrito.vaciarCarrito();
-    }
+    document.addEventListener('keydown',function (e) {
+        if(e.key == 'Escape'){
+            modal.style.display = "none";
+        }
+    })
 }
 
 function agregarAlCarrito(id) {

@@ -25,7 +25,7 @@ html {
 /**	Body */
 body {
     background-color: #134f5c;
-    color: #d0e0e3;
+    
 }
 
 /**	Header */
@@ -63,7 +63,6 @@ h2,
 h3 {
     margin: 1em 0;
     font-size: 3em;
-    color: #134f5c;
 }
 
 /**	Main */
@@ -91,7 +90,6 @@ ol li {
     font-size: 2.4em;
     line-height: 1.5;
     text-align: left;
-    color: #134f5c;
 }
 
 ul li,
@@ -115,7 +113,6 @@ ol li a {
 p a,
 ul li a,
 ol li a {
-    color: #134f5c;
 }
 
 p strong,
@@ -133,8 +130,9 @@ ol li em {
 form {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
 }
 
 label {
@@ -166,7 +164,7 @@ input {
     margin: 0.5em 0;
     border: 1px solid #134f5c;
     border-radius: 0.5em;
-    padding: 0 1em;
+    padding: 10px 1em;
     font-size: 2.4em;
     line-height: 1.5;
     text-align: left;
@@ -250,14 +248,14 @@ footer ul li {
     font-size: 1.4em;
     line-height: 1.5;
     text-align: center;
-    color: #d0e0e3;
+    
 }
 
 footer ul li a {
     font-family: 'Montserrat';
     font-size: 1em;
     text-decoration: none;
-    color: #d0e0e3;
+    
 }
 
 /**	Overs */
@@ -267,6 +265,7 @@ button:hover,
 input[type='button']:hover,
 input[type='submit']:hover {
     opacity: 0.8;
+    cursor: pointer;
 }
 
 /**	Carrito */
@@ -292,29 +291,23 @@ input[type='submit']:hover {
     background: rgba(19, 79, 92, 0.25);
 }
 
-#productos div {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    width: 90%;
-    padding: 1em;
-    border: 2px solid rgb(255, 71, 92);
-    border-radius: 20px;
-}
 
 #productos img {
-    height: 40vh;
+    width: 150px;
     margin: 1em 5%;
 }
 
 #productos div div {
     padding: 0;
+    justify-content: space-between;
+    margin: 2vh 0;
 }
 
 #productos h3,
 #productos p {
     margin: 0;
     text-align: center;
+    width: 75%;
 }
 
 .modal {
@@ -335,7 +328,7 @@ input[type='submit']:hover {
 
 .modal a {
     text-decoration: none;
-    color: #d0e0e3;
+    
 }
 
 .modal a.cerrar {
@@ -372,9 +365,9 @@ input[type='submit']:hover {
 .modal h3,
 .modal p,
 .modal li {
-    margin: 0;
+    margin: 0 auto;
     text-align: center;
-    color: #d0e0e3;
+    width: 80%;
 }
 
 .modal li {
@@ -396,13 +389,6 @@ input[type='submit']:hover {
         flex-direction: row;
     }
 
-    #productos div {
-        width: 30%;
-        margin: 1.1%;
-        min-height: 800px;
-        justify-content: space-between;
-    }
-
     /**	Footer */
     footer ul {
         flex-direction: row;
@@ -411,7 +397,6 @@ input[type='submit']:hover {
 
 @media screen and (max-width: 959px) {
     #productos div {
-        margin: 2vh 0;
     }
 }
 
@@ -485,11 +470,10 @@ input[type='submit']:hover {
     display: flex;
     flex-wrap: wrap;
     height: 100%;
-    flex-direction: row;
+    flex-direction: column;
     align-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 2vw;
+    justify-content: center;
 }
 
 #detalleCheckout > div{
@@ -527,8 +511,37 @@ input[type='submit']:hover {
     color: black;
 }
 
+.containerProductos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 span{
     font-size: 20px;
-    color: red;
     text-align: center;
+}
+
+.card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center;
+    min-height: 450px !important;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid #d0e0e3;
+    background-color: transparent !important;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
