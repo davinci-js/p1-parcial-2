@@ -24,46 +24,51 @@ function renderProductos(filtroCategoria = null) {
     }
 
     productosFiltrados.forEach(producto => {
-        const productoElement = document.createElement('div');
-        productoElement.classList.add('col-lg-3');
-        productoElement.classList.add('col-md-6');
-        productoElement.classList.add('col-12');
-        productoElement.classList.add('card');
-
+        const prodColEl = document.createElement('div');
+        prodColEl.classList.add('col-xl-3', 'col-lg-4', 'col-md-6');
+        
+        const cardEl = document.createElement('div');
+        cardEl.classList.add('card');
+        
         const img = document.createElement('img');
         img.src = producto.imagen;
         img.alt = producto.nombre;
-        productoElement.appendChild(img);
+        cardEl.appendChild(img);
+
+        const titleEl = document.createElement('h3');
+        titleEl.textContent = producto.nombre;
+        cardEl.appendChild(titleEl);
+
+        const textEl = document.createElement('p');
+        textEl.classList.add('card-text');
+        textEl.textContent = producto.descripcion;
+        cardEl.appendChild(textEl);
 
         const contentElement = document.createElement('div');
         contentElement.classList.add('card-content');
 
-        const h2 = document.createElement('h2');
-        h2.textContent = producto.nombre;
-        productoElement.appendChild(h2);
-
-        const h3 = document.createElement('h3');
-        h3.textContent = producto.descripcion;
-        productoElement.appendChild(h3);
-
-        const spanPrecio = document.createElement('span');
+        const spanPrecio = document.createElement('p');
+        spanPrecio.classList.add('price');
         spanPrecio.textContent = `Precio: $${producto.precio}`;
-        productoElement.appendChild(spanPrecio);
+        contentElement.appendChild(spanPrecio);
 
-        const spanCategoria = document.createElement('span');
+        const spanCategoria = document.createElement('p');
+        spanCategoria.classList.add('category');
         spanCategoria.textContent = `Categoría: ${producto.categoria}`;
-        productoElement.appendChild(spanCategoria);
+        contentElement.appendChild(spanCategoria);
 
         const button = document.createElement('button');
-        button.classList.add('btn');
-        button.classList.add('btn-secondary');
+        button.classList.add('btn', 'btn-secondary');
         button.textContent = 'Ver detalle';
         button.addEventListener('click', () => mostrarDetalleProducto(producto.id));
         contentElement.appendChild(button);
-        productoElement.appendChild(contentElement);
-        contenedorProductos.appendChild(productoElement);
+
+        cardEl.appendChild(contentElement);
+        prodColEl.appendChild(cardEl);
+        contenedorProductos.appendChild(prodColEl);
     });
 }
+
 
 function filtrarPorCategoria(categoria) {
     modalOferta();
