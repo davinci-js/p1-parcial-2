@@ -140,6 +140,7 @@ label {
     line-height: 1.5;
     text-align: left;
     color: #134f5c;
+    margin: 1vh 0;
 }
 
 fieldset {
@@ -357,7 +358,7 @@ input[type='submit']:hover {
 }
 
 .modal img {
-    width: 100px;
+    width: 70px;
     margin: 0 auto;
     display: block;
 }
@@ -458,12 +459,6 @@ input[type='submit']:hover {
     align-items: center;
     justify-content: space-between;
     padding: 0 2vw;
-}
-
-#detalleCarrito > div{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 #detalleCheckout{
@@ -568,4 +563,13 @@ span{
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+
+.card-item-detail{
+    display: flex;
+    align-items: center;
+}
+
+.vw-30{
+    width: 30vw;
 }

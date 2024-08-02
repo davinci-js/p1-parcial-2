@@ -182,68 +182,78 @@ function mostrarCarrito() {
     const detalleCarrito = document.getElementById('detalleCarrito');
     const removeButton = document.createElement('button');
     removeButton.textContent = "Eliminar todos los productos del carrito";
-    removeButton.classList.add('btn');
-    removeButton.classList.add('btn-danger');
-    removeButton.addEventListener('click', ()=> vaciarCarrito());
+    removeButton.classList.add('btn', 'btn-danger');
+    removeButton.addEventListener('click', () => vaciarCarrito());
+    let totalCompra = 0;
 
     while (detalleCarrito.firstChild) {
         detalleCarrito.removeChild(detalleCarrito.firstChild);
     }
 
+    const totalCheckout = document.createElement('p');
+    totalCheckout.classList.add('text-center', 'w-100');
+
     if (carrito.productos.length > 0) {
         carrito.productos.forEach(prod => {
             const div = document.createElement('div');
-            div.classList.add('h-100');
-            div.classList.add('col-lg-5');
-            div.classList.add('col-md-6');
-            div.classList.add('col-sm-12');
-            div.classList.add('mb-4');
+            div.classList.add('card-item-detail', 'col-lg-12', 'col-md-12', 'col-sm-12');
+
+            const imgContainer = document.createElement('div');
+            const dataContainer = document.createElement('div');
+            imgContainer.style.width = "10%";
+            dataContainer.style.fontSize = "7px";
+            dataContainer.style.display = "flex";
+            dataContainer.style.width = "90%";
+            dataContainer.style.alignItems = "center";
 
             const img = document.createElement('img');
             img.src = prod.imagen;
             img.alt = prod.nombre;
-            div.appendChild(img);
-
-            const h2 = document.createElement('h2');
-            h2.textContent = prod.nombre;
-            div.appendChild(h2);
+            imgContainer.appendChild(img);
 
             const p1 = document.createElement('p');
-            p1.textContent = `Precio: $${prod.precio}`;
-            div.appendChild(p1);
-
-            const p2 = document.createElement('p');
-            p2.textContent = prod.categoria;
-            div.appendChild(p2);
+            p1.textContent = `$ ${prod.precio}`;
+            dataContainer.appendChild(p1);
 
             const unidades = document.createElement('p');
-            unidades.textContent = `Cantidad: ${prod.cantidad || 1}`;
-            div.appendChild(unidades);
+            unidades.textContent = `${prod.cantidad || 1} unidades`;
+            dataContainer.appendChild(unidades);
 
             const totalPrecio = document.createElement('p');
             totalPrecio.textContent = `Total: $${prod.totalPrecio}`;
-            div.appendChild(totalPrecio);
+            dataContainer.appendChild(totalPrecio);
+
+            totalCompra += prod.totalPrecio;
+            totalCheckout.textContent = `Total: $${totalCompra}`;
 
             const button = document.createElement('button');
-            button.classList.add('p-3');
-            button.classList.add('rounded');
-            button.textContent = 'Quitar del carrito';
-            button.addEventListener('click', () => removerDelCarrito(prod));
-            div.appendChild(button);
+            button.classList.add('p-3', 'rounded', 'btn', 'btn-danger');
+
+            if (prod.cantidad > 1) {
+                button.innerHTML = '<i class="fas fa-minus" style="color: white;"></i>';
+                button.addEventListener('click', () => reducirUnidad(prod));
+            } else {
+                button.innerHTML = '<i class="fas fa-trash" style="color: white;"></i>';
+                button.addEventListener('click', () => removerDelCarrito(prod));
+            }
+
+            dataContainer.appendChild(button);
+
+            div.appendChild(imgContainer);
+            div.appendChild(dataContainer);
             detalleCarrito.appendChild(div);
         });
-        const checkout = document.createElement('button');
-        checkout.classList.add('btn');
-        checkout.classList.add('btn-primary');
-        checkout.classList.add('w-50');
-        checkout.classList.add('mx-auto');
-        checkout.classList.add('my-4');
-        checkout.textContent = "Ir a pagar";
-        checkout.addEventListener('click',()=>mostrarCheckout())
+
         const containerBtn = document.createElement('div');
-        containerBtn.classList.add('w-100');
-        containerBtn.classList.add('mx-auto');
+        containerBtn.classList.add('w-100', 'd-flex', 'justify-content-center');
+
+        const checkout = document.createElement('button');
+        checkout.classList.add('btn', 'btn-primary', 'w-50', 'my-4');
+        checkout.textContent = "Ir a pagar";
+        checkout.addEventListener('click', () => mostrarCheckout());
         containerBtn.appendChild(checkout);
+
+        detalleCarrito.appendChild(totalCheckout);
         detalleCarrito.appendChild(containerBtn);
     } else {
         const h1 = document.createElement('h1');
@@ -255,6 +265,18 @@ function mostrarCarrito() {
 
     mostrarModal('modalCarrito');
 }
+
+function reducirUnidad(prod) {
+    prod.cantidad--;
+    prod.totalPrecio -= prod.precio;
+    if (prod.cantidad === 0) {
+        removerDelCarrito(prod);
+    } else {
+        mostrarCarrito();
+    }
+}
+
+
 
 
 
@@ -312,38 +334,57 @@ function mostrarCheckout() {
         inputLugar.placeholder = "Ingrese su lugar de entrega";
         inputLugar.minLength=6;
         inputLugar.required = true;
-
         const labelFechaDeEntrega = document.createElement('label');
         labelFechaDeEntrega.textContent = "Fecha De Entrega";
         const inputFechaDeEntrega = document.createElement('input');
         inputFechaDeEntrega.type="date"
         inputFechaDeEntrega.placeholder = "Ingrese su Fecha De Entrega";
         inputFechaDeEntrega.required = true;
-
+        
         const labelMetodoDePago = document.createElement('label');
         labelMetodoDePago.textContent = "Método De Pago";
         
+        const divContainerMetodosPago = document.createElement('div');
+        divContainerMetodosPago.classList.add("d-flex","vw-30","justify-content-evenly","my-2");
+        const divContainerVisa = document.createElement('div');
+        divContainerVisa.classList.add("d-flex","flex-column","justify-content-center")
+        const divContainerMastercard = document.createElement('div');
+        divContainerMastercard.classList.add("d-flex","flex-column","justify-content-center")
+        const divContainerAmex = document.createElement('div');
+        divContainerAmex.classList.add("d-flex","flex-column","justify-content-center")
         const inputMetodoDePagoVisa = document.createElement('input');
         inputMetodoDePagoVisa.type = "radio";
         inputMetodoDePagoVisa.name = "metodoPago";
-        inputMetodoDePagoVisa.checked = true; // Seleccionado por defecto
+        inputMetodoDePagoVisa.checked = true;
         const labelVisa = document.createElement('label');
-        labelVisa.textContent = "Visa";
+        const labelVisaImg = document.createElement('img');
+        labelVisaImg.src = "../images/tarjetas/visa.svg";
         labelVisa.htmlFor = "visa";
+        labelVisa.appendChild(labelVisaImg);
+        divContainerVisa.appendChild(labelVisa)
+        divContainerVisa.appendChild(inputMetodoDePagoVisa);
         
         const inputMetodoDePagoMastercard = document.createElement('input');
         inputMetodoDePagoMastercard.type = "radio";
         inputMetodoDePagoMastercard.name = "metodoPago";
         const labelMastercard = document.createElement('label');
-        labelMastercard.textContent = "Mastercard";
+        const labelMastercardImg = document.createElement('img');
+        labelMastercardImg.src = "../images/tarjetas/mastercard.svg";
         labelMastercard.htmlFor = "mastercard";
-        
+        labelMastercard.appendChild(labelMastercardImg);
+        divContainerMastercard.appendChild(labelMastercard)
+        divContainerMastercard.appendChild(inputMetodoDePagoMastercard);
+        const labelAmex = document.createElement('label');
+        const labelAmexImg = document.createElement('img');
+        labelAmexImg.src = '../images/tarjetas/amex.svg';
         const inputMetodoDePagoAmex = document.createElement('input');
         inputMetodoDePagoAmex.type = "radio";
         inputMetodoDePagoAmex.name = "metodoPago";
-        const labelAmex = document.createElement('label');
-        labelAmex.textContent = "American Express";
         labelAmex.htmlFor = "amex";
+        labelAmex.appendChild(labelAmexImg);
+        divContainerAmex.appendChild(labelAmex)
+        divContainerAmex.appendChild(inputMetodoDePagoAmex);
+
 
         formDatos.appendChild(labelNombre);
         formDatos.appendChild(inputNombre);
@@ -356,12 +397,10 @@ function mostrarCheckout() {
         formDatos.appendChild(labelFechaDeEntrega);
         formDatos.appendChild(inputFechaDeEntrega);
         formDatos.appendChild(labelMetodoDePago);
-        formDatos.appendChild(labelVisa);
-        formDatos.appendChild(inputMetodoDePagoVisa);
-        formDatos.appendChild(labelMastercard);
-        formDatos.appendChild(inputMetodoDePagoMastercard);
-        formDatos.appendChild(labelAmex);
-        formDatos.appendChild(inputMetodoDePagoAmex);
+        divContainerMetodosPago.appendChild(divContainerVisa);
+        divContainerMetodosPago.appendChild(divContainerMastercard);
+        divContainerMetodosPago.appendChild(divContainerAmex);
+        formDatos.appendChild(divContainerMetodosPago);
         detalleCheckout.appendChild(formDatos);
 
         const finalizarCompraBtn = document.createElement('button');
