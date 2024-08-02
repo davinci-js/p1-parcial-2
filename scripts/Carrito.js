@@ -17,10 +17,10 @@ class Carrito {
     }
 
     removerProducto(prod) {
-        if(prod.cantidad<=1){
+        if (prod.cantidad <= 1) {
             this.productos = this.productos.filter(producto => producto.id !== prod.id);
-        } else{
-            prod.cantidad = parseInt(prod.cantidad)-1
+        } else {
+            prod.cantidad = parseInt(prod.cantidad) - 1;
             prod.totalPrecio -= prod.precio;
         }
         this.actualizarCarrito();
@@ -43,17 +43,12 @@ class Carrito {
         const carritoElemento = document.getElementById('carrito');
         carritoElemento.textContent = '';
         const itemsAgregados = document.createElement('p');
-        if(this.contarProductos()>0){
-            itemsAgregados.textContent = `${this.contarProductos()} ítems agregados`;
-        } else{
-            itemsAgregados.textContent = "El carrito está vacío"
-        }
-
         const total = document.createElement('p');
-        if(this.obtenerTotal()>0){
+        if (this.contarProductos() > 0) {
+            itemsAgregados.textContent = `${this.contarProductos()} ítems agregados`;
             total.textContent = `$${this.obtenerTotal()} es el total`;
-        } else{
-            total.textContent = ""
+        } else {
+            itemsAgregados.textContent = "El carrito está vacío";
         }
 
         const filtrarPor = document.createElement('p');
@@ -89,14 +84,12 @@ class Carrito {
 
         const verCarritoBtn = document.createElement('button');
         verCarritoBtn.textContent = 'Ver carrito';
-        verCarritoBtn.classList.add('btn')
-        verCarritoBtn.classList.add('btn-primary')
+        verCarritoBtn.classList.add('btn', 'btn-primary');
         verCarritoBtn.onclick = mostrarCarrito;
+
         const vaciarCarritoBtn = document.createElement('button');
         vaciarCarritoBtn.textContent = 'Vaciar carrito';
-        vaciarCarritoBtn.classList.add('btn')
-        vaciarCarritoBtn.classList.add('btn-danger')
-        vaciarCarritoBtn.classList.add('mx-2');
+        vaciarCarritoBtn.classList.add('btn', 'btn-danger', 'mx-2');
         vaciarCarritoBtn.onclick = vaciarCarrito;
 
         carritoElemento.appendChild(itemsAgregados);
@@ -106,4 +99,5 @@ class Carrito {
         carritoElemento.appendChild(vaciarCarritoBtn);
     }
 }
+
 const carrito = new Carrito();

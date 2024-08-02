@@ -280,7 +280,7 @@ input[type='submit']:hover {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 1em 0;
     width: 100%;
@@ -561,6 +561,7 @@ span{
 .card-item-detail{
     display: flex;
     align-items: center;
+    background-color: aliceblue;
 }
 
 .vw-30{
