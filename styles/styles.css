@@ -110,11 +110,6 @@ ol li a {
     font-size: 1em;
 }
 
-p a,
-ul li a,
-ol li a {
-}
-
 p strong,
 ul li strong,
 ol li strong {
@@ -397,8 +392,6 @@ input[type='submit']:hover {
 }
 
 @media screen and (max-width: 959px) {
-    #productos div {
-    }
 }
 
 
@@ -418,7 +411,7 @@ input[type='submit']:hover {
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; 
-    max-width: 500px;
+    max-width: 600px;
     min-height: 450px;
     border: 1px solid #888;
 }
