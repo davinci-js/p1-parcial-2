@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderProductos();
         })
         .catch(error => console.error('Error al cargar los productos:', error));
+    carrito.actualizarCarrito();
 });
 
 function renderProductos(filtroCategoria = null) {
@@ -203,7 +204,7 @@ function mostrarCarrito() {
     if (carrito.productos.length > 0) {
         carrito.productos.forEach(prod => {
             const div = document.createElement('div');
-            div.classList.add('card-item-detail', 'col-lg-12', 'col-md-12', 'col-sm-12');
+            div.classList.add('card-item-detail', 'col-lg-12', 'col-md-12', 'col-sm-12','my-3');
 
             const imgContainer = document.createElement('div');
             const dataContainer = document.createElement('div');

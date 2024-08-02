@@ -1,6 +1,6 @@
 class Carrito {
     constructor() {
-        this.productos = [];
+        this.productos = this.cargarCarritoDesdeLocalStorage();
     }
 
     agregarProducto(producto) {
@@ -14,6 +14,7 @@ class Carrito {
             this.productos.push(producto);
         }
         this.actualizarCarrito();
+        this.guardarCarritoEnLocalStorage();
     }
 
     removerProducto(prod) {
@@ -24,11 +25,13 @@ class Carrito {
             prod.totalPrecio -= prod.precio;
         }
         this.actualizarCarrito();
+        this.guardarCarritoEnLocalStorage();
     }
 
     vaciarCarrito() {
-        this.productos.splice(0, this.productos.length);
+        this.productos = [];
         this.actualizarCarrito();
+        this.guardarCarritoEnLocalStorage();
     }
 
     obtenerTotal() {
@@ -97,6 +100,15 @@ class Carrito {
         carritoElemento.appendChild(filtrarPor);
         carritoElemento.appendChild(verCarritoBtn);
         carritoElemento.appendChild(vaciarCarritoBtn);
+    }
+
+    guardarCarritoEnLocalStorage() {
+        localStorage.setItem('carrito', JSON.stringify(this.productos));
+    }
+
+    cargarCarritoDesdeLocalStorage() {
+        const carritoGuardado = localStorage.getItem('carrito');
+        return carritoGuardado ? JSON.parse(carritoGuardado) : [];
     }
 }
 

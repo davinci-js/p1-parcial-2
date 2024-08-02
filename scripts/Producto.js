@@ -1,5 +1,3 @@
-
-
 class Producto {
     constructor(id, nombre, descripcion, precio, imagen, categoria) {
         this.id = id;
