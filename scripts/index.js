@@ -358,7 +358,7 @@ function mostrarCheckout() {
         inputMetodoDePagoVisa.checked = true;
         const labelVisa = document.createElement('label');
         const labelVisaImg = document.createElement('img');
-        labelVisaImg.src = "../images/tarjetas/visa.svg";
+        labelVisaImg.src = "./images/tarjetas/visa.svg";
         labelVisa.htmlFor = "visa";
         labelVisa.appendChild(labelVisaImg);
         divContainerVisa.appendChild(labelVisa)
@@ -369,14 +369,14 @@ function mostrarCheckout() {
         inputMetodoDePagoMastercard.name = "metodoPago";
         const labelMastercard = document.createElement('label');
         const labelMastercardImg = document.createElement('img');
-        labelMastercardImg.src = "../images/tarjetas/mastercard.svg";
+        labelMastercardImg.src = "./images/tarjetas/mastercard.svg";
         labelMastercard.htmlFor = "mastercard";
         labelMastercard.appendChild(labelMastercardImg);
         divContainerMastercard.appendChild(labelMastercard)
         divContainerMastercard.appendChild(inputMetodoDePagoMastercard);
         const labelAmex = document.createElement('label');
         const labelAmexImg = document.createElement('img');
-        labelAmexImg.src = '../images/tarjetas/amex.svg';
+        labelAmexImg.src = './images/tarjetas/amex.svg';
         const inputMetodoDePagoAmex = document.createElement('input');
         inputMetodoDePagoAmex.type = "radio";
         inputMetodoDePagoAmex.name = "metodoPago";
