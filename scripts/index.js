@@ -234,18 +234,27 @@ function mostrarCarrito() {
             totalCompra += prod.totalPrecio;
             totalCheckout.textContent = `Total: $${totalCompra}`;
 
-            const button = document.createElement('button');
-            button.classList.add('p-3', 'rounded', 'btn', 'btn-danger');
+            const buttonRemove = document.createElement('button');
+            buttonRemove.classList.add('p-3', 'rounded', 'btn', 'btn-danger');
+
+            const iconTrash = document.createElement('i');
+            iconTrash.classList.add('fas', 'fa-trash');
+            iconTrash.style.color = 'white';
+
+            const iconRemove = document.createElement('i');
+            iconRemove.classList.add('fas', 'fa-minus');
+            iconRemove.style.color = 'white';
+            buttonRemove.textContent = '';
 
             if (prod.cantidad > 1) {
-                button.innerHTML = '<i class="fas fa-minus" style="color: white;"></i>';
-                button.addEventListener('click', () => reducirUnidad(prod));
+                buttonRemove.appendChild(iconRemove);
+                buttonRemove.addEventListener('click', () => reducirUnidad(prod));
             } else {
-                button.innerHTML = '<i class="fas fa-trash" style="color: white;"></i>';
-                button.addEventListener('click', () => removerDelCarrito(prod));
+                buttonRemove.appendChild(iconTrash);
+                buttonRemove.addEventListener('click', () => removerDelCarrito(prod));
             }
 
-            dataContainer.appendChild(button);
+            dataContainer.appendChild(buttonRemove);
 
             div.appendChild(imgContainer);
             div.appendChild(dataContainer);

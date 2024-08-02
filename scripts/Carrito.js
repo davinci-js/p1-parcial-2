@@ -1,12 +1,13 @@
 class Carrito {
-    constructor() {
+    constructor(id) {
+        this.id = id;
         this.productos = this.cargarCarritoDesdeLocalStorage();
     }
 
     agregarProducto(producto) {
         let productoExistente = this.productos.find(prod => prod.id === producto.id);
         if (productoExistente) {
-            productoExistente.cantidad = (productoExistente.cantidad || 1) + 1; 
+            productoExistente.cantidad = (productoExistente.cantidad || 1) + 1;
             productoExistente.totalPrecio = productoExistente.cantidad * productoExistente.precio;
         } else {
             producto.cantidad = 1;
@@ -108,7 +109,8 @@ class Carrito {
 
     cargarCarritoDesdeLocalStorage() {
         const carritoGuardado = localStorage.getItem('carrito');
-        return carritoGuardado ? JSON.parse(carritoGuardado) : [];
+        const productos = carritoGuardado ? JSON.parse(carritoGuardado) : [];
+        return Array.isArray(productos) ? productos : [];
     }
 }
 
