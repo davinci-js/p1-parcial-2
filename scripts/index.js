@@ -97,7 +97,7 @@ function modalOferta() {
     modalContent.style.textAlign = 'center';
 
     const img = document.createElement('img');
-    img.src = '../images/gordo-pelusa1_no_bg.png';
+    img.src = './images/gordo-pelusa1_no_bg.png';
     img.alt = 'Gordo Pelusa';
     img.style.maxWidth = '100%';
     img.style.height = 'auto';
